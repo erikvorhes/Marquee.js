@@ -1,3 +1,4 @@
+(function ($) {
 /**
  * @file
  * Marquee 
@@ -54,8 +55,12 @@ $.fn.marqueeize = function(options) {
     return this.each(function(){
         var marquee = $(this);
         if (marquee.hasClass("fixed")) { settings.resizable = false; }
-		if (marquee.hasClass("hasBeenMarqueed")) { /*console.log("The following marquee has already received instruction and will not receive further instruction."); console.log(marquee); */}
-		else {
+		if (marquee.hasClass("hasBeenMarqueed")) { 
+            if (!!console && !!console.log) {
+                console.log("The following marquee has already received instruction and will not receive further instruction.");
+                console.log(marquee);
+            }
+        } else {
 	        if (options) { $.extend(settings,options); } // Merge provided options with defaults
 
 			marquee.addClass("hasBeenMarqueed");
@@ -218,7 +223,7 @@ $.fn.marqueeAutoplayEnable = function () {
                 if (!marquee.data('hover') && marquee.data('autoplay')) { marquee.marqueeGoTo("next"); }
             },global_marquee_settings.autoplay_slide_duration);
         }
-    ).("autoplay-off").addClass("autoplay-on");
+    ).removeClass("autoplay-off").addClass("autoplay-on");
 }
 
 /**
@@ -559,3 +564,5 @@ $(function(){
  * - Changed "hide transition" speed from 150ms to 10ms
  * - Optimizing marquee.css to be more library-like
  *
+ */
+}(jQuery));
